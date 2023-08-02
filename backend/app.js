@@ -27,7 +27,6 @@ app.post('/add-data', (req, res) => {
 
   const PostId = generateRandomString();
   
-  // Check the SQL query for syntax errors and placeholders
   const insertQuery = `INSERT INTO books (Title, Author, Publisher, Category, Description, PageCount, Price, PostId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   const values = [Title, Author, Publisher, Category, Description, PageCount, Price, PostId];
 
@@ -64,7 +63,6 @@ app.put('/update-data/:postId', (req, res) => {
 app.delete('/delete-data/:postId', (req, res) => {
   const { postId } = req.params;
 
-  // Perform the deletion operation in the database
   const deleteQuery = `DELETE FROM books WHERE PostId = ?`;
 
   db.query(deleteQuery, [postId], (err, result) => {

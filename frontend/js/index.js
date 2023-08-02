@@ -36,25 +36,24 @@ function createCards(data) {
     cardContainer.appendChild(cardCol);
 
     card.querySelector('.delete-button').addEventListener('click', (event) => {
-      event.stopPropagation(); // Prevent the click event from bubbling to the card click event
+      event.stopPropagation(); 
       const postId = event.target.dataset.postId;
-      deleteData(postId); // Call the deleteData function when the button is clicked
+      deleteData(postId);
     });
 
     card.querySelector('.edit-button').addEventListener('click', (event) => {
-      event.stopPropagation(); // Prevent the click event from bubbling to the card click event
+      event.stopPropagation(); 
       const postId = event.target.dataset.postId;
-      redirectToEditPage(postId); // Call the deleteData function when the button is clicked
+      redirectToEditPage(postId);
     });
 
     card.addEventListener('click', () => {
-      redirectToDetailPage(item.PostId); // Tıklanan kartın ID'sini detay sayfasına yönlendiren fonksiyona gönder
+      redirectToDetailPage(item.PostId);
     });
 
   });
 }
 function redirectToDetailPage(postId) {
-  // Kartın tıklanmasına göre detay sayfasına yönlendirme işlemi
   window.location.href = `details.html?postId=${postId}`;
 }
 
@@ -65,7 +64,6 @@ function deleteData(postId) {
     .then(response => response.json())
     .then(data => {
       console.log('Veri başarıyla silindi:', data);
-      // Optionally, you can refresh the data after deletion
       fetch('http://localhost:3000/get-data')
         .then(response => response.json())
         .then(data => {
@@ -77,6 +75,5 @@ function deleteData(postId) {
 }
 
 function redirectToEditPage(postId) {
-  // Redirect to the edit page with the specific postId
   window.location.href = `edit.html?postId=${postId}`;
 }

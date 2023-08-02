@@ -18,7 +18,6 @@ function fetchDetailData(postId) {
     `;
   }
   
-  // Detay sayfası yüklendiğinde detay verilerini al
   window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('postId');
