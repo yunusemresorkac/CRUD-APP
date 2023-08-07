@@ -10,10 +10,10 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
     if (err) {
-        console.error('Veritabanı bağlantısı başarısız:', err);
+        console.error('Error:', err);
         return;
     }
-    console.log('Veritabanı bağlantısı başarılı.');
+    console.log('Connected.');
 });
 
 module.exports = connection;

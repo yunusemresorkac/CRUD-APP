@@ -2,10 +2,31 @@
 fetch('http://localhost:3000/get-data')
   .then(response => response.json())
   .then(data => {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.trim();
+      const filteredData = searchByTitle(data, searchTerm);
+      createCards(filteredData);
+    });
     createCards(data);
 
   })
   .catch(error => console.error('Hata:', error));
+
+
+function searchByTitle(data, searchTerm) {
+  if (!searchTerm) {
+    return data;
+  }
+
+  const filteredData = data.filter(item => {
+    const title = item.Title.toLowerCase();
+    return title.includes(searchTerm.toLowerCase());
+  });
+
+  return filteredData;
+}
+
 
 function createCards(data) {
   const cardContainer = document.getElementById('cardContainer');
@@ -36,20 +57,18 @@ function createCards(data) {
     cardContainer.appendChild(cardCol);
 
     card.querySelector('.delete-button').addEventListener('click', (event) => {
-      event.stopPropagation(); 
+      event.stopPropagation();
       const postId = event.target.dataset.postId;
       deleteData(postId);
     });
 
     card.querySelector('.edit-button').addEventListener('click', (event) => {
-      event.stopPropagation(); 
+      event.stopPropagation();
       const postId = event.target.dataset.postId;
       redirectToEditPage(postId);
     });
 
-    card.addEventListener('click', () => {
-      redirectToDetailPage(item.PostId);
-    });
+
 
   });
 }
@@ -64,7 +83,7 @@ function deleteData(postId) {
     .then(response => response.json())
     .then(data => {
       console.log('Veri başarıyla silindi:', data);
-      fetch('http://localhost:3000/get-data')
+      fetch('')
         .then(response => response.json())
         .then(data => {
           createCards(data);
